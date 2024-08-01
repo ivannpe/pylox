@@ -1,5 +1,5 @@
 from app.token import Token
-
+import sys
 class Scanner:
     def __init__(self, source) -> None:
         self.source = source
@@ -40,8 +40,11 @@ class Scanner:
                 self.add_token("SEMICOLON")
             case "*":
                 self.add_token("STAR")
+            case _:
+                print(self.line, f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
+                raise
 
-                
+
     def is_at_end(self):
         return self.current >= len(self.source)
     
