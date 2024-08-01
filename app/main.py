@@ -1,4 +1,4 @@
-import scanner
+from app.scanner import Scanner
 import sys
 
 
@@ -20,8 +20,8 @@ def main():
     with open(filename) as file:
         file_contents = file.read()
 
-    scan = scanner.Scanner(file_contents)
-    tokens = scan.scan_tokens()
+    scanner = Scanner(file_contents)
+    tokens = scanner.scan_tokens()
 
     for token in tokens:
         print(token)

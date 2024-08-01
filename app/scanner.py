@@ -1,4 +1,4 @@
-from .token import Token
+from app.token import Token
 
 class Scanner:
     def __init__(self, source) -> None:
