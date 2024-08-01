@@ -41,7 +41,7 @@ class Scanner:
             case "*":
                 self.add_token("STAR")
             case _:
-                print(self.line, f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
+                print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                 exit(65)
 
 
