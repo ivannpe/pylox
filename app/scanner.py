@@ -1,4 +1,4 @@
-import token
+from .token import Token
 
 class Scanner:
     def __init__(self, source) -> None:
@@ -13,7 +13,7 @@ class Scanner:
             self.start = self.current
             self.scan_token()
         
-        self.tokens.append(token.Token("EOF", "","null",self.line))
+        self.tokens.append(Token("EOF", "","null",self.line))
         return self.tokens
 
     def scan_token(self):
@@ -35,4 +35,4 @@ class Scanner:
 
     def add_token(self, type):
         text = self.source[self.start : self.current]
-        self.tokens.append(token.Token(type, text, "null", self.line))
+        self.tokens.append(Token(type, text, "null", self.line))
