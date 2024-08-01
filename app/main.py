@@ -1,3 +1,4 @@
+import scanner
 import sys
 
 
@@ -19,11 +20,17 @@ def main():
     with open(filename) as file:
         file_contents = file.read()
 
+    scan = scanner.Scanner(file_contents)
+    tokens = scan.scan_tokens()
+
+    for token in tokens:
+        print(token)
+
     # Uncomment this block to pass the first stage
     if file_contents:
         raise NotImplementedError("Scanner not implemented")
-    else:
-        print("EOF  null") # Placeholder, remove this line when implementing the scanner
+    # else:
+    #     print("EOF  null") # Placeholder, remove this line when implementing the scanner
 
 
 if __name__ == "__main__":
