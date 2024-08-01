@@ -42,7 +42,6 @@ class Scanner:
                 self.add_token("STAR")
             case _:
                 print(self.line, f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
-                raise
 
 
     def is_at_end(self):
