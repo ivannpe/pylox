@@ -24,6 +24,11 @@ class Scanner:
                 self.add_token("LEFT_PAREN")
             case ")":
                 self.add_token("RIGHT_PAREN")
+            case "{":
+                self.add_token("LEFT_BRACE")
+            case "}":
+                self.add_token("RIGHT_BRACE")
+            
 
     
     def is_at_end(self):
