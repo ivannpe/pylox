@@ -29,8 +29,9 @@ def main():
         if "Error" in str(token):
             error = True
 
-
+    print(error)
     if error:
+        print("ERROR HAPPENED")
         exit(65)
 
     # Uncomment this block to pass the first stage
