@@ -66,8 +66,22 @@ class Scanner:
             case '"':
                 self.string()
             case _:
-                print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
-                self.exit_code = 65
+                if self.is_digit(c):
+                    self.number()
+                else:
+                    print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
+                    self.exit_code = 65
+
+    def number(self):
+        while self.is_digit(self.peek()):
+            self.advance()
+        
+        if self.peek() == "." and self.is_digit(self.peek_next()):
+            self.advance()
+            while self.is_digit(self.peek()):
+                self.advance()
+
+        self.add_token("NUMBER", float(self.source[self.start : self.current])) 
 
     def string(self):
         while self.peek() != '"' and not self.is_at_end():
@@ -97,6 +111,14 @@ class Scanner:
         if self.is_at_end():
             return "\0"
         return self.source[self.current]
+    
+    def peek_next(self):
+        if self.current + 1 >= len(self.source):
+            return "\0"
+        return self.source[self.current + 1]
+
+    def is_digit(self, c):
+        return c >= "0" and c <= "9"
 
     def is_at_end(self):
         return self.current >= len(self.source)
