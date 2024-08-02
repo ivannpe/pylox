@@ -7,6 +7,7 @@ class Scanner:
         self.start = 0
         self.current = 0
         self.line = 1
+        self.exit_code = 0
 
     def scan_tokens(self):
         while not self.is_at_end():
@@ -41,8 +42,8 @@ class Scanner:
             case "*":
                 self.add_token("STAR")
             case _:
-                print(f"[line {self.line}] Error: Unexpected character: {c}")#, file=sys.stderr)
-                # exit(65)
+                print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
+                self.exit_code = 65
 
 
     def is_at_end(self):

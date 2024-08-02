@@ -22,16 +22,12 @@ def main():
 
     scanner = Scanner(file_contents)
     tokens = scanner.scan_tokens()
-    error = False
 
     for token in tokens:
         print(token)
-        if "Error" in str(token):
-            error = True
 
-    print(error)
-    if error:
-        print("ERROR HAPPENED")
+
+    if scanner.exit_code == 65:
         exit(65)
 
     # Uncomment this block to pass the first stage
