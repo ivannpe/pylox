@@ -57,8 +57,12 @@ class Scanner:
                     self.add_token("SLASH")
             case " ":
                 pass
+            case "\r":
+                pass
             case "\t":  
                 pass
+            case "\n":
+                self.line += 1
             case _:
                 print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                 self.exit_code = 65
