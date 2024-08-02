@@ -26,7 +26,7 @@ def main():
 
     for token in tokens:
         print(token)
-        if "Error" in token:
+        if "Error" in str(token):
             error = True
 
 
