@@ -41,10 +41,20 @@ class Scanner:
                 self.add_token("SEMICOLON")
             case "*":
                 self.add_token("STAR")
+            case "=":
+               self.add_token("EQUAL_EQUAL" if self.match('=') else "EQUAL") 
             case _:
                 print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                 self.exit_code = 65
 
+    def match(self, expected):
+        if self.is_at_end():
+            return False
+        if self.source[self.current] != expected:
+            return False
+        
+        self.current += 1
+        return True
 
     def is_at_end(self):
         return self.current >= len(self.source)
