@@ -41,6 +41,8 @@ class Scanner:
                 self.add_token("SEMICOLON")
             case "*":
                 self.add_token("STAR")
+            case "!":
+                self.add_token("BANG_EQUAL" if self.match("=") else "BANG")
             case "=":
                self.add_token("EQUAL_EQUAL" if self.match('=') else "EQUAL") 
             case _:
