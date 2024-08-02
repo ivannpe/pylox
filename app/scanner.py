@@ -45,6 +45,10 @@ class Scanner:
                 self.add_token("BANG_EQUAL" if self.match("=") else "BANG")
             case "=":
                self.add_token("EQUAL_EQUAL" if self.match('=') else "EQUAL") 
+            case "<":
+                self.add_token("LESS_EQUAL" if self.match("=") else "LESS")
+            case ">":
+                self.add_token("GREATER_EQUAL" if self.match("=") else "GREATER")
             case _:
                 print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                 self.exit_code = 65
