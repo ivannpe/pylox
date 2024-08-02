@@ -49,6 +49,12 @@ class Scanner:
                 self.add_token("LESS_EQUAL" if self.match("=") else "LESS")
             case ">":
                 self.add_token("GREATER_EQUAL" if self.match("=") else "GREATER")
+            case "/":
+                if self.match("/"):
+                    while self.peek() != "\n" and not self.is_at_end():
+                        self.advance()
+                else:
+                    self.add_token("SLASH")
             case _:
                 print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                 self.exit_code = 65
@@ -61,6 +67,11 @@ class Scanner:
         
         self.current += 1
         return True
+
+    def peek(self):
+        if self.is_at_end():
+            return "\0"
+        return self.source[self.current]
 
     def is_at_end(self):
         return self.current >= len(self.source)
