@@ -28,9 +28,8 @@ def main():
         print(token)
         if "Error" in token:
             error = True
-            
 
-    
+
     if error:
         exit(65)
 
