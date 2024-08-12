@@ -15,7 +15,7 @@ class Scanner:
             self.start = self.current
             self.scan_token()
         
-        self.tokens.append(Token("EOF", "","null",self.line))
+        self.tokens.append(Token(TokenType.EOF, "","null",self.line))
         return self.tokens
 
     def scan_token(self):
