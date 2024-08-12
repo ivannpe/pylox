@@ -15,7 +15,7 @@ class Scanner:
             self.start = self.current
             self.scan_token()
         
-        self.tokens.append(Token(TokenType.EOF, "","null",self.line))
+        self.tokens.append(Token("EOF", "","null",self.line))
         return self.tokens
 
     def scan_token(self):
@@ -69,9 +69,17 @@ class Scanner:
             case _:
                 if self.is_digit(c):
                     self.number()
+                elif self.is_alpha(c):
+                    self.identifier()
                 else:
                     print(f"[line {self.line}] Error: Unexpected character: {c}", file=sys.stderr)
                     self.exit_code = 65
+
+    def identifier(self):
+        while self.is_alphanumeric(self.peek()):
+            self.advance()
+        
+        self.add_token(TokenType.IDENTIFIER)
 
     def number(self):
         while self.is_digit(self.peek()):
@@ -117,6 +125,12 @@ class Scanner:
         if self.current + 1 >= len(self.source):
             return "\0"
         return self.source[self.current + 1]
+    
+    def is_alpha(self, c):
+        return (c >= "a" and c <= "z") or (c >= "A" and c <= "Z") or (c == "_")
+
+    def is_alphanumeric(self, c):
+        return self.is_alpha(c) or self.is_digit(c)
 
     def is_digit(self, c):
         return c >= "0" and c <= "9"
