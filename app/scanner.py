@@ -9,6 +9,24 @@ class Scanner:
         self.current = 0
         self.line = 1
         self.exit_code = 0
+        self.keywords = {
+            "and" : TokenType.AND, 
+            "class" : TokenType.CLASS,
+            "else" : TokenType.ELSE,
+            "false" : TokenType.FALSE,
+            "for" : TokenType.FOR,
+            "fun" : TokenType.FUN,
+            "if" : TokenType.IF,
+            "nil" : TokenType.NIL,
+            "or" : TokenType.OR,
+            "print" : TokenType.PRINT,
+            "return" : TokenType.RETURN,
+            "super" : TokenType.SUPER,
+            "this" : TokenType.THIS,
+            "true" : TokenType.TRUE,
+            "var" : TokenType.VAR,
+            "while" : TokenType.WHILE, 
+        }
 
     def scan_tokens(self):
         while not self.is_at_end():
@@ -79,7 +97,10 @@ class Scanner:
         while self.is_alphanumeric(self.peek()):
             self.advance()
         
-        self.add_token(TokenType.IDENTIFIER)
+        text = self.source[self.start : self.current]
+        type = self.keywords.get(text, TokenType.IDENTIFIER)
+        
+        self.add_token(type) 
 
     def number(self):
         while self.is_digit(self.peek()):
